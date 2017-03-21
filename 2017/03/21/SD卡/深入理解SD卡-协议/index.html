@@ -19,22 +19,22 @@
 <meta property="og:site_name" content="lightmen's Blog">
 <meta property="og:description" content="Overview深入理解SD卡系列文章将介绍SD卡，涉及SD卡的协议及驱动代码。我们学习SD卡目的是为了理解SD卡的驱动代码，修改它，最终解决工作中遇到的SD卡相关的问题。本系列文章的目标是理解SD，包括协议和驱动代码。在学习任何设备驱动时，有个东西我们是无法绕过的，那就是协议，本文讲的就是SD卡的协议。
 学习SD卡协议，可以让我们更好的了解SD卡的运作机制。在最开始学习SD卡的时候，我们只需要对">
-<meta property="og:image" content="http://yoursite.com/./images/SD-Memory-Card-Architecture.png">
-<meta property="og:image" content="http://yoursite.com/./images/SD-Memory-Card-Registers.png">
-<meta property="og:image" content="http://yoursite.com/./images/ocr.png">
-<meta property="og:image" content="http://yoursite.com/./images/cid.png">
-<meta property="og:image" content="http://yoursite.com/./images/csd.png">
-<meta property="og:image" content="http://yoursite.com/./images/scr.png">
-<meta property="og:image" content="http://yoursite.com/./images/Command-Sequence-to-Use-UHS-I.png">
-<meta property="og:image" content="http://yoursite.com/./images/SD-Memory-Card-State-Diagram_card-identification-mode.png">
-<meta property="og:image" content="http://yoursite.com/./images/Card-Initialization-and-Identification-Flow.png">
-<meta property="og:image" content="http://yoursite.com/./images/SD-Memory-Card-State-Diagram_data-transfer-mode.png">
-<meta property="og:updated_time" content="2017-03-21T11:30:13.000Z">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-Architecture.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-Registers.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/ocr.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/cid.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/csd.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/scr.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/Command-Sequence-to-Use-UHS-I.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-State-Diagram_card-identification-mode.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/Card-Initialization-and-Identification-Flow.png">
+<meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-State-Diagram_data-transfer-mode.png">
+<meta property="og:updated_time" content="2017-03-21T13:14:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解SD卡:协议">
 <meta name="twitter:description" content="Overview深入理解SD卡系列文章将介绍SD卡，涉及SD卡的协议及驱动代码。我们学习SD卡目的是为了理解SD卡的驱动代码，修改它，最终解决工作中遇到的SD卡相关的问题。本系列文章的目标是理解SD，包括协议和驱动代码。在学习任何设备驱动时，有个东西我们是无法绕过的，那就是协议，本文讲的就是SD卡的协议。
 学习SD卡协议，可以让我们更好的了解SD卡的运作机制。在最开始学习SD卡的时候，我们只需要对">
-<meta name="twitter:image" content="http://yoursite.com/./images/SD-Memory-Card-Architecture.png">
+<meta name="twitter:image" content="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-Architecture.png">
 
     
     <link rel="alternative" href="/atom.xml" title="lightmen&#39;s Blog" type="application/atom+xml">
@@ -176,24 +176,24 @@
 <p>不管Command，还是Response或者Data，都开始于一个start bit （bit值0），结束于一个end bit（bit值1）。</p>
 <p>关于这块的内容不做过多解释了，详情自行阅读”Physical Layer Simplified Specification Version 4.10”文档 “3.6 Bus Protocl” 章节的内容。 </p>
 <h1 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h1><p>下图是SD卡的体系架构，可以看到内部包含了一系列的寄存器：</p>
-<p><img src="./images/SD-Memory-Card-Architecture.png" alt="SD Memory Card Architecture"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-Architecture.png" alt="SD Memory Card Architecture"></p>
 <p>各个寄存器的详细信息如下：</p>
-<p><img src="./images/SD-Memory-Card-Registers.png" alt="SD Memory Card Registers"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-Registers.png" alt="SD Memory Card Registers"></p>
 <h2 id="OCR-register"><a href="#OCR-register" class="headerlink" title="OCR register"></a>OCR register</h2><p>OCR寄存器保存着SD卡的工作电压范围。如果OCR寄存器的某位为1，表示卡支持该位对应的电压。最后一位表示卡上电后的状态(是否处于”忙状态”)，如果该位为0，表示忙，如果为1，表示处于空闲状态。</p>
-<p><img src="./images/ocr.png" alt="OCR Register Definition"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/ocr.png" alt="OCR Register Definition"></p>
 <h2 id="CID-register"><a href="#CID-register" class="headerlink" title="CID register"></a>CID register</h2><p>CID是一个128 bits的寄存器，该寄存器包含一个卡的标识信息。</p>
-<p><img src="./images/cid.png" alt="The CID Fields"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/cid.png" alt="The CID Fields"></p>
 <h2 id="CSD-Register"><a href="#CSD-Register" class="headerlink" title="CSD Register"></a>CSD Register</h2><p>卡的描述数据寄存器（CSD）包含了访问该卡数据时的必要配置信息，比如the data format, error correction type, maximum data access time, device size 等等。</p>
-<p><img src="./images/csd.png" alt="The CSD Register Fields (CSD Version 2.0)"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/csd.png" alt="The CSD Register Fields (CSD Version 2.0)"></p>
 <h2 id="RCA-register"><a href="#RCA-register" class="headerlink" title="RCA register"></a>RCA register</h2><p>卡的相对地址,该16位卡地址寄存器保存了卡在识别过程中发布的地址。该地址用于在主机识别卡后，利用该地址与卡进行通信。该寄存器只有在SD模式下才有效。</p>
 <h2 id="SCR-register"><a href="#SCR-register" class="headerlink" title="SCR register"></a>SCR register</h2><p>SD配置寄存器提供SD卡的特殊特性信息，其大小为64位。该寄存器由厂商编程，主机不能对它进行编程。</p>
-<p><img src="./images/scr.png" alt="The SCR Fields"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/scr.png" alt="The SCR Fields"></p>
 <h1 id="UHS"><a href="#UHS" class="headerlink" title="UHS"></a>UHS</h1><p>UHS（Ultra High Speed）是与SDXC同时推出的SD卡总线标准。此标准适用于SDHC和SDXC。</p>
 <p>UHS-I最高传输速度（理论值）为104MB/s。英文字母I代表该设备（SD卡或读卡器）支持UHS-I接口。英文字母U，包含数目字1，代表该设备读写速度达U1。</p>
 <p>UHS-II最高传输速度达312MB/s，是UHS-I的三倍。</p>
 <p>设备（如智能手机）必须支持UHS，才能保证达到U1或U3最低写入速度。</p>
 <p>下面介绍UHS-I初始化的命令序列流程。</p>
-<p><img src="./images/Command-Sequence-to-Use-UHS-I.png" alt="Command Sequence to Use UHS-I"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/Command-Sequence-to-Use-UHS-I.png" alt="Command Sequence to Use UHS-I"></p>
 <ul>
 <li>上电后，卡会处于3.3V signaling模式下。第一个CMD0命令会选择bus模式：SD模式或者SPI模式。只有在SD模式下，才能进入1.8V signaling模式。一旦卡进入1.8V signal模式，卡不能切换到SPI模式或者3.3V signal模式，除非重新上电。</li>
 <li>收到CMD0命令后，卡将进入空闲状态（Idle state），但是仍然工作在SDR12时序下。UHS-I只提供了SD模式，没有提供SPI模式。</li>
@@ -207,7 +207,7 @@
 <li>Data transfer mode: 当卡第一次发布它的RCA后，该卡将处于数据传输模式。而对主机来说，在它识别了bus线上的所有卡后，进入该模式。</li>
 </ul>
 <h2 id="Card-identification-mode"><a href="#Card-identification-mode" class="headerlink" title="Card identification mode"></a>Card identification mode</h2><h3 id="Operating-Condition-Validation"><a href="#Operating-Condition-Validation" class="headerlink" title="Operating Condition Validation"></a>Operating Condition Validation</h3><p>SD卡识别模式流程图如下：</p>
-<p><img src="./images/SD-Memory-Card-State-Diagram_card-identification-mode.png" alt="SD Memory Card State Diagram (card identification mode)"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-State-Diagram_card-identification-mode.png" alt="SD Memory Card State Diagram (card identification mode)"></p>
 <ol>
 <li><p>在主机与卡通信之前，主机不清楚卡支持的电压范围，并且卡也不知道是否支持主机提供的供电电压。主机会以默认电压发送一个reset指令(CMD0),并且主机默认卡能支持该命令。然后，为了确认电压，主机接下来会发送一个CMD8命令。</p>
 </li>
@@ -220,7 +220,7 @@
 <li><p>在整个初始化过程中，主机不允许改变正在操作的电压范围。</p>
 </li>
 </ol>
-<h3 id="Card-Initialization-and-Identification-Process"><a href="#Card-Initialization-and-Identification-Process" class="headerlink" title="Card Initialization and Identification Process"></a>Card Initialization and Identification Process</h3><p><img src="./images/Card-Initialization-and-Identification-Flow.png" alt="Card Initialization and Identification Flow (SD mode)"></p>
+<h3 id="Card-Initialization-and-Identification-Process"><a href="#Card-Initialization-and-Identification-Process" class="headerlink" title="Card Initialization and Identification Process"></a>Card Initialization and Identification Process</h3><p><img src="http://on61oh42c.bkt.clouddn.com/Card-Initialization-and-Identification-Flow.png" alt="Card Initialization and Identification Flow (SD mode)"></p>
 <ol>
 <li><p>当总线被激合后，主机就开始处理卡的初始化和识别。在主机发送SD_SEND_OP_COND(ACMD41)命令开始处理SD卡初始化时，主机会在ACMD41的参数中设置它的操作条件和设置OCR中的HCS位。HCS位被设置为1表示主机支持SDHC或者SDXC。HCS被设置为0表示主机不支持SDHC和SDXC。</p>
 </li>
@@ -238,7 +238,7 @@
 <p>SET_DSR(CMD4)广播命令配置所有识别到的卡的驱动阶段。它对DSR寄存器进行编程以适应应用的总线布局（长度）、总线上卡的数目和数据传输频率。clock rate也是在这个时候从fOD切到fpp。对卡和主机来说，SET_DSR(CMD4)命令是个可选。</p>
 <p>CMD7用于选择卡，并且将卡带入传输状态(Transfer State)。在同一个时间内，只有一张卡能进入传输状态。当发送的CMD7的RCA地址参数为”0x0000”，所有卡将跳回到准备状态（Stand-by State ）。</p>
 <p>SD卡数据传输模式的流程图如下：</p>
-<p><img src="./images/SD-Memory-Card-State-Diagram_data-transfer-mode.png" alt=" SD Memory Card State Diagram (data transfer mode)"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-State-Diagram_data-transfer-mode.png" alt=" SD Memory Card State Diagram (data transfer mode)"></p>
 <p>对已经拥有RCA的卡来说，对它发送identification commands（比如ACMD41、CMD2），它将不会有任何回应。在数据传输模式下，主机与被选中的卡（使用定向命令）之间的数据传输都是点对点的。通过cmd线，所有定向命令（addressed commands）都会收到一个用于确认的response。</p>
 <p>下面是数据传输模式下关于数据传输的一些总结：</p>
 <ul>
