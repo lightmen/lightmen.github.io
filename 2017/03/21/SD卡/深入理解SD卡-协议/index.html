@@ -29,7 +29,7 @@
 <meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-State-Diagram_card-identification-mode.png">
 <meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/Card-Initialization-and-Identification-Flow.png">
 <meta property="og:image" content="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-State-Diagram_data-transfer-mode.png">
-<meta property="og:updated_time" content="2017-03-21T13:14:20.000Z">
+<meta property="og:updated_time" content="2017-03-21T14:00:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解SD卡:协议">
 <meta name="twitter:description" content="Overview深入理解SD卡系列文章将介绍SD卡，涉及SD卡的协议及驱动代码。我们学习SD卡目的是为了理解SD卡的驱动代码，修改它，最终解决工作中遇到的SD卡相关的问题。本系列文章的目标是理解SD，包括协议和驱动代码。在学习任何设备驱动时，有个东西我们是无法绕过的，那就是协议，本文讲的就是SD卡的协议。
@@ -176,7 +176,7 @@
 <p>不管Command，还是Response或者Data，都开始于一个start bit （bit值0），结束于一个end bit（bit值1）。</p>
 <p>关于这块的内容不做过多解释了，详情自行阅读”Physical Layer Simplified Specification Version 4.10”文档 “3.6 Bus Protocl” 章节的内容。 </p>
 <h1 id="Registers"><a href="#Registers" class="headerlink" title="Registers"></a>Registers</h1><p>下图是SD卡的体系架构，可以看到内部包含了一系列的寄存器：</p>
-<p><img src="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-Architecture.png" alt="SD Memory Card Architecture"></p>
+<p><img src="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-Architecture.png" ,="" class="img-center"></p>
 <p>各个寄存器的详细信息如下：</p>
 <p><img src="http://on61oh42c.bkt.clouddn.com/SD-Memory-Card-Registers.png" alt="SD Memory Card Registers"></p>
 <h2 id="OCR-register"><a href="#OCR-register" class="headerlink" title="OCR register"></a>OCR register</h2><p>OCR寄存器保存着SD卡的工作电压范围。如果OCR寄存器的某位为1，表示卡支持该位对应的电压。最后一位表示卡上电后的状态(是否处于”忙状态”)，如果该位为0，表示忙，如果为1，表示处于空闲状态。</p>
@@ -377,10 +377,6 @@
 			
 		
 			
-				<li><a href="/tags/贪心算法/" title="贪心算法">贪心算法<sup>1</sup></a></li>
-			
-		
-			
 				<li><a href="/tags/SD卡协议/" title="SD卡协议">SD卡协议<sup>1</sup></a></li>
 			
 		
@@ -392,6 +388,8 @@
 				<li><a href="/tags/内核/" title="内核">内核<sup>1</sup></a></li>
 			
 		
+			
+				<li><a href="/tags/贪心算法/" title="贪心算法">贪心算法<sup>1</sup></a></li>
 			
 		
 		</ul>
